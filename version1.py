@@ -12,7 +12,7 @@ qa = {"what is the highest moutain from sea level?": ["Mount Everest", "Mount Ki
 
 root = Tk()
 root.title("Quiz")
-root.geometry("500x700")
+root.geometry("500x400")
 
 #quiz information
 questions = list(qa.keys())
@@ -24,34 +24,29 @@ answer_buttons = []
 
 #obtaining user information
 def submit():
-    if ename.get() == "" or eage.get() == "":
-        messagebox.showerror("Error", "Please enter a name")
+    if ename.get() == "" or eage.get() == "" or eyl.get() == "":#checks if the user has entered their details
+        messagebox.showerror("Error", "Please enter your details")
     else:#removes the details from the quiz
-        name.grid_forget()
-        ename.grid_forget()
-        yl.grid_forget()
-        eyl.grid_forget()
-        age.grid_forget()
-        eage.grid_forget()
-        submit_button.grid_forget()
-        label.grid_forget()
-        #printing user information for testing (delete code later)
-        print(f"name: {ename.get()}\nyear levl: {eyl.get()}\nage: {eage.get()}")
-        #running the main quiz
-        butoon()
-        ask_question()
+        if int(eage.get()) > 8 and int(eyl.get() in range(1, 13)):#checks if the user is under 8 or not in year level 1-13   
+            name.grid_forget()
+            ename.grid_forget()
+            yl.grid_forget()
+            eyl.grid_forget()
+            age.grid_forget()
+            eage.grid_forget()
+            submit_button.grid_forget()
+            label.grid_forget()
+            #running the main quiz
+            butoon()
+            ask_question()
+    messagebox.showerror("Error", "Please enter a valid age or year level")
 
 
-
-
-
-
-#quiz
+#quiz functions
 def ask_question():
     #asking the questions and asigning the answers
     #changes the question label to the current question
     question_label.config(text=questions[question_number])
-    print(answer_buttons)
     for i, btn in enumerate(answer_buttons):
         btn.config(text=answers[question_number][i], command=lambda i=i: check_answer(i))
 
@@ -74,8 +69,9 @@ def butoon():
     for i in range(4):
         btn = Button(root, text='', width=15)
         btn.grid(row=1,column=i)
-        print(btn)
         answer_buttons.append(btn)
+
+
 
 #creates the label for the question
 question_label = Label(root, text="", font=("Arial", 14))
