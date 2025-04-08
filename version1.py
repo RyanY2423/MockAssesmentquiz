@@ -26,20 +26,21 @@ answer_buttons = []
 def submit():
     if ename.get() == "" or eage.get() == "" or eyl.get() == "":#checks if the user has entered their details
         messagebox.showerror("Error", "Please enter your details")
-    else:#removes the details from the quiz
-        if int(eage.get()) > 8 and int(eyl.get() in range(1, 13)):#checks if the user is under 8 or not in year level 1-13   
-            name.grid_forget()
-            ename.grid_forget()
-            yl.grid_forget()
-            eyl.grid_forget()
-            age.grid_forget()
-            eage.grid_forget()
-            submit_button.grid_forget()
-            label.grid_forget()
-            #running the main quiz
-            butoon()
-            ask_question()
-    messagebox.showerror("Error", "Please enter a valid age or year level")
+    #removes the details from the quiz and checks for validity of the age and year level
+    elif int(eage.get()) > 8 and int(eyl.get()) in range(1,14):#checks if the user is under 8 or not in year level 1-13   
+        name.grid_forget()
+        ename.grid_forget()
+        yl.grid_forget()
+        eyl.grid_forget()
+        age.grid_forget()
+        eage.grid_forget()
+        submit_button.grid_forget()
+        label.grid_forget()
+        #running the main quiz
+        butoon()
+        ask_question()
+    else:
+        messagebox.showerror("Error", "Please enter a valid age or year level")
 
 
 #quiz functions
